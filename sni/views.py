@@ -49,11 +49,7 @@ class SignupView(account.views.SignupView):
         UserProfile.objects.create(
             user = self.created_user,
             first_name = form.cleaned_data["first_name"],
-            last_name = form.cleaned_data["last_name"],
-            image = form.cleaned_data["image"],
-            mobile = form.cleaned_data["mobile"],
-            facebook = form.cleaned_data["facebook"],
-            address = form.cleaned_data["address"]
+            last_name = form.cleaned_data["last_name"]
             )
 
     def after_signup(self, form):

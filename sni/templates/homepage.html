@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/sni.css">
 {% endblock %}
 
-{% block head_title %}NOISLII{% endblock %}
+{% block head_title %}CLEAN RAJASTHAN{% endblock %}
 
 {% block body_class %}home{% endblock %}
 
@@ -19,11 +19,10 @@
             {% url "account_signup" as signup_url %}
 
             <div class="container homesni">
-                <h2 class="text-center">{% blocktrans %}NOISLII{% endblocktrans %}</h2>
+                <h2 class="text-center">{% blocktrans %}CLEAN RAJASTHAN{% endblocktrans %}</h2>
                 <p class="text-center">
                     {% blocktrans %}
-                    Django web app for sound management. Contribute with 
-                    <a href="https://github.com/sinwar/noisli">GitHub</a>.
+                      Contribute to clean rajasthan mission by sign up now.
                     {% endblocktrans %}
                 </p>
             </div>
@@ -48,42 +47,13 @@
                 </div>
               </div>
 
+              <div id="myModal" class="modal">
+                  <button class="close" id="close-pop" onclick="hideblock()">X</button>
+                  <img class="modal-content" id="img01" height="500px" width="500px">
+                  <div id="caption"></div>
+              </div>
 
-            <!-- content to be shown when use logged in -->
-
-            <!--
-                <div class="col-md-3 col-md-offset-8 addbutton">
-                    <a href="{%url 'add_item' %}" class="button btn-lg active"><i class="fa fa-plus fa-2x" > ADD</i></a>
-                </div>
-                <br><br>
-
-                <div class="text-center sounds">    
-                  <div class="row content">
-
-
-                  </div>
-                <div class="row usersounds">
-                    
-                    <br>
-                    <h2 class="text-center"> Sound added by {{ user }} <h2>
-                    <br>
-                    {% for i, j, k in things %}
-                        <div class="col-md-6">
-
-                              <img src="{{ j }}" title="ThunderStorm" height="200px" width="200px">
-                              <br>
-                              
-                              <br>
-                              <button id="{{ k }}" class='playsoundbyuser'>Play</button>
-                              <button id="{{ k }}" class='pausesoundbyuser'>Pause</button>
-                              <br><br>
-                        </div>
-
-                    {% endfor %}
-
-                  </div>
-                </div>
-           -->
+            
             {% endif %}
         </div>
     </section>

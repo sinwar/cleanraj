@@ -6,37 +6,13 @@ function take_snapshot() {
 }
 */
 
-// convert base64 to raw binary data held in a string
-function b64toBlob(b64Data, contentType, sliceSize) {
-  contentType = contentType || '';
-  sliceSize = sliceSize || 512;
-
-  var byteCharacters = atob(b64Data);
-  var byteArrays = [];
-
-  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-    var byteNumbers = new Array(slice.length);
-    for (var i = 0; i < slice.length; i++) {
-      byteNumbers[i] = slice.charCodeAt(i);
-    }
-
-    var byteArray = new Uint8Array(byteNumbers);
-
-    byteArrays.push(byteArray);
-  }
-    
-  var blob = new Blob(byteArrays, {type: contentType});
-  return blob;
-}
 
 
 function initMap() 
 {
-       var uluru = {lat: -25.363, lng: 131.044};
+       var uluru = {lat: 24.571270, lng: 73.691544};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 20,
+          zoom: 10,
           center: uluru,
           disableDefaultUI: true
         });
@@ -51,20 +27,54 @@ function initMap()
 
 		    var cords_data = JSON.parse(data);
 
+		    var markers = new Array(40);
+		    var latarray = new Array(40);
+		    var lonarray = new Array(40);
+
+
+			var modal = document.getElementById('myModal');
+			var mapmodal = document.getElementById('map');
+			var modalImg = document.getElementById("img01");
+
+
+			// store lan lon in arrays
+		    for(var i=0; i<cords_data.length; i++)
+		    {
+		    	latarray[i] = cords_data[i].fields.lat;
+		    	lonarray[i] = cords_data[i].fields.lon;
+		    }
+
 		    for(var i=0; i<cords_data.length; i++)
 		    {
 
-			    var marker = new google.maps.Marker({
-		          position: {lat: cords_data[i].fields.lat, lng: cords_data[i].fields.lon},
-		          map: map
+		    	
+			    markers[i] = new google.maps.Marker({
+		          position: {lat: latarray[i], lng: lonarray[i]},
+		          map: map,
+		          icon:'/site_media/media/trash-can.png'
 		        });
 
-		        var contentType = 'image/jpeg';
-		        var blob = b64toBlob(cords_data[i].fields.garbage_pic, contentType);
-				var blob_garbage_url = URL.createObjectURL(blob);
-		        console.log(blob_garbage_url);
-		        marker.addListener('click', function(){
-					infowindow.open(map, marker);
+		        markers[i].addListener('click', function(e){
+					//infowindow.open(map, markers[i]);
+					// open window with full content
+					//mapmodal.style.display = "none";
+					modal.style.display = "block";
+
+					console.log(markers[0].position.lat);
+
+					var latlon = e.latLng;
+					console.log(latlon.lat(), latlon.lng());
+
+					
+					for(var j=0; j<cords_data.length; j++)
+					{
+						if(latarray[j] == latlon.lat() && lonarray[j] == latlon.lng())
+						{
+							modalImg.src = cords_data[j].fields.garbage_pic;
+						}
+					}
+    				
+
 				});
 		    }
 
@@ -85,7 +95,8 @@ function initMap()
 
 		  var marker = new google.maps.Marker({
 		    position: latLng,
-		    map: map
+		    map: map,
+		    icon:'/site_media/media/trash-can.png'
 		  });
 		  
 
@@ -127,10 +138,7 @@ function initMap()
 		  });
 		  
 		}
-
-		var infowindow = new google.maps.InfoWindow({
-		  content:"<h4>yha kachra h!</h4><\n><img src='' id='garbage-image' style='height:30px; width:40px;'></img>"
-		});
+		
 
 		var infowindow_new = new google.maps.InfoWindow({
 		  content:"<input type='file' accept='image/*' id='file-input' capture>"
@@ -138,5 +146,12 @@ function initMap()
 
 
 
+}
+
+
+					// When the user clicks on <span> (x), close the modal
+function hideblock() {
+	var modal = document.getElementById('myModal');
+	modal.style.display = "none";
 }
   

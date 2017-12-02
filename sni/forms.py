@@ -24,23 +24,6 @@ class SignupForm(account.forms.SignupForm):
         max_length = 30,
         required = True
     )
-    image = forms.ImageField(
-        label = _("Upload image"),
-        required = True
-    )
-    address = forms.CharField(
-        label = _("Interest"),
-        required= True
-    )
-    mobile = forms.CharField(
-        label = _("mobile number"),
-        required = True
-    )
-
-    facebook = forms.URLField(
-        label = _("facebook profile"),
-        required = True
-    )
 
     # validator for first name
     def clean_first_name(self):
@@ -58,14 +41,6 @@ class SignupForm(account.forms.SignupForm):
 
         return last_name
 
-    # validator for mobile number
-    def clean_mobile(self):
-        mobile = self.cleaned_data["mobile"]
-
-        if len(mobile) != 10:
-            raise forms.ValidationError(_("Please Enter your 10 digit mobile number"))
-
-        return mobile
 
 
 
