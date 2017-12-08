@@ -11,12 +11,42 @@ var span;
 
 function initMap() 
 {
-       var uluru = {lat: 24.571270, lng: 73.691544};
+        var uluru = {lat: 24.571270, lng: 73.691544};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
+          zoom: 20,
           center: uluru,
           disableDefaultUI: true
         });
+
+		if (navigator.geolocation) {
+	          navigator.geolocation.getCurrentPosition(function(position) {
+	            var pos = {
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude
+	            };
+	            map.setCenter(pos);
+	          }, function() {
+	            handleLocationError(true);
+	          });
+
+	    } 
+	    else 
+	    {
+	          // Browser doesn't support Geolocation
+	          handleLocationError(false);
+	    }
+      
+
+        function handleLocationError(browserHasGeolocation) {
+	        if(browserHasGeolocation)
+	        {
+	        	console.log("user hasn't given location permission.");
+	        }
+	        else
+	        {
+	        	alert("your browser is outdated.");
+	        }
+        }
 
 
         // load all points
