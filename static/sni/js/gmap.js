@@ -18,12 +18,17 @@ function initMap()
           disableDefaultUI: true
         });
 
+        user_location_window = new google.maps.InfoWindow;
+
 		if (navigator.geolocation) {
 	          navigator.geolocation.getCurrentPosition(function(position) {
 	            var pos = {
 	              lat: position.coords.latitude,
 	              lng: position.coords.longitude
 	            };
+	            user_location_window.setPosition(pos);
+	            user_location_window.setContent('your location');
+	            user_location_window.open(map);
 	            map.setCenter(pos);
 	          }, function() {
 	            handleLocationError(true);
@@ -61,6 +66,7 @@ function initMap()
 		    var markers = new Array(40);
 		    var latarray = new Array(40);
 		    var lonarray = new Array(40);
+		    var pkarray = new Array(40);
 
 
 			var modal = document.getElementById('myModal');
@@ -73,6 +79,7 @@ function initMap()
 		    {
 		    	latarray[i] = cords_data[i].fields.lat;
 		    	lonarray[i] = cords_data[i].fields.lon;
+		    	pkarray[i] = cords_data[i].pk;
 		    }
 
 		    for(var i=0; i<cords_data.length; i++)
@@ -91,7 +98,11 @@ function initMap()
 
 					parentDOM = document.getElementById('myModal');
 					span = parentDOM.getElementsByClassName('close')[0];
-					console.log("span is " + span);
+
+					var captioncontent = document.getElementById("caption");
+
+					
+					
 
 					// When the user clicks on <span> (x), close the modal
 					span.onclick = function() {
@@ -100,18 +111,39 @@ function initMap()
 					}
 					  
 
-					console.log(markers[0].position.lat);
+					//console.log(markers[0].position.lat);
 
 					var latlon = e.latLng;
 					console.log(latlon.lat(), latlon.lng());
 
-					
+					var location_can_be_remove;
 					for(var j=0; j<cords_data.length; j++)
 					{
 						if(latarray[j] == latlon.lat() && lonarray[j] == latlon.lng())
 						{
 							modalImg.src = cords_data[j].fields.garbage_pic;
+							location_can_be_remove=pkarray[j];
+							if(captioncontent)
+							{
+								captioncontent.innerHTML = "<button type='button'>REMOVE</button>";									
+							}
 						}
+					}
+					if(location_can_be_remove && captioncontent)
+					{
+						captioncontent.addEventListener('click', function(){
+									$.ajax({
+									    url: "/removelocation/",
+									    type:"POST",
+									    data: {pk:location_can_be_remove}
+									  }).done(function(data){
+									     modal.style.display = "none";
+									     console.log('deleted');
+									     
+								    });
+
+
+								}, false);
 					}
     				
 
@@ -122,7 +154,7 @@ function initMap()
 		    console.log(cords_data[0].fields.lat);
 		  });
 
-        map.addListener('click', function(e) {
+        map.addListener('dblclick', function(e) {
 
         	// open infowindow
 		    placeMarkerAndPanTo(e.latLng, map);
@@ -151,13 +183,11 @@ function initMap()
 		  	file = e.target.files[0];
 		  	console.log(file);
 		  	
-		  	//console.log()
-		  	//image_file=URL.createObjectURL(file);
-		  	//console.log(image_file);
+		  	
 
 		  	var reader = new window.FileReader();	
 		  	reader.readAsDataURL(file); 
-		  	console.log(reader);	  	
+		  	
 			reader.onloadend = function() {
                 base64data = reader.result;                
                 console.log(base64data);

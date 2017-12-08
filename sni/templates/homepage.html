@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ STATIC_URL }}css/sni.css">
 {% endblock %}
 
-{% block head_title %}CLEAN RAJASTHAN{% endblock %}
+{% block head_title %}CLEAN INDIA{% endblock %}
 
 {% block body_class %}home{% endblock %}
 
@@ -19,7 +19,7 @@
             {% url "account_signup" as signup_url %}
 
             <div class="container homesni">
-                <h2 class="text-center">{% blocktrans %}CLEAN RAJASTHAN{% endblocktrans %}</h2>
+                <h2 class="text-center">{% blocktrans %}CLEAN INDIA{% endblocktrans %}</h2>
                 <p class="text-center">
                     {% blocktrans %}
                       Contribute to clean rajasthan mission by sign up now.
@@ -49,8 +49,17 @@
 
               <div id="myModal" class="modal">
                   <span class="close" id="close-pop">X</span>
-                  <img class="modal-content" id="img01" height="500px" width="500px">
-                  <div id="caption"></div>
+                  <img class="modal-content" id="img01">
+
+                  
+
+                  
+                      {% if request.user.is_superuser %}
+                            <div id="caption">
+                            
+                            </div>
+                        {% endif %}
+                  
               </div>
 
             

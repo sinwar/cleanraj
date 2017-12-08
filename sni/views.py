@@ -89,26 +89,7 @@ class addThingCreate(CreateView):
 
 def homeView(request):
     garbage_points = location.objects.all()
-    """
-    for i in things:
-        path = ""
-        for j in reversed(i.soundimage.url):
-            if j == '/':
-                break
-            else:
-                path = j + path
-        listi.append("{0}{1}{2}".format(settings.MEDIA_URL, "/things/", path))
-    listj = []
-    for i in things:
-        path = ""
-        for j in reversed(i.sound.url):
-            if j == '/':
-                break
-            else:
-                path = j + path
-        listj.append("{0}{1}{2}".format(settings.MEDIA_URL, "/sounds/", path))
-    things=zip(things, listi, listj)
-    """
+    
     return render(request, 'homepage.html',{'garbage_points':garbage_points})
 
 def show_garbage_points(request):
@@ -116,7 +97,12 @@ def show_garbage_points(request):
 
     garbage_points_json = serializers.serialize("json", garbage_points)
 
-    data = {"garbage_cords": garbage_points_json}
+    pk = []
+
+    for i in garbage_points:
+        pk.append(i.pk)
+
+    data = {"garbage_cords": garbage_points_json, "pk":pk}
 
     return HttpResponse(garbage_points_json)
 
@@ -145,3 +131,22 @@ def save_cordinates(request):
     return JsonResponse(data)
 
 
+# views to show garbage locations to admin so he can remove it after cleaning
+@login_required
+def show_garbage_locations(request):
+    garbage_points = location.objects.all()
+    return render(request, 'sni/admin.html', {'garbage_points':garbage_points})
+
+
+# view for delete item
+
+def remove_location(request):
+    pk = request.POST.get('pk', None)
+    print(pk)
+    print("============================")
+    locationpoint = get_object_or_404(location, pk=pk)
+    locationpoint.delete()
+    data = {
+        'Success': 'success'
+    }
+    return JsonResponse(data)

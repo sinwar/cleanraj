@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.conf.urls.static import static
 
 
-from .views import SignupView, ProView, homeView, addThingCreate, validate_username, save_cordinates, show_garbage_points
+from .views import *
 
 
 urlpatterns = [
@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^ajax/validate_username/$', validate_username, name='validate_username'),
     url(r'^savecords/$', save_cordinates, name='save_cordinates'),
     url(r'^showcords/$', show_garbage_points, name='show_garbage_points'),
+    url(r'^localadmin/$', show_garbage_locations, name='show_garbage_locations'),
+    url(r'^removelocation/$', remove_location, name='remove_location'),
     url(r"^account/", include("account.urls")),
 ]
 
