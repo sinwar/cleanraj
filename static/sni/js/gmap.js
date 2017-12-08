@@ -5,7 +5,8 @@ function take_snapshot() {
 	} );
 }
 */
-
+// global variable to close the
+var span;
 
 
 function initMap() 
@@ -55,10 +56,19 @@ function initMap()
 		        });
 
 		        markers[i].addListener('click', function(e){
-					//infowindow.open(map, markers[i]);
-					// open window with full content
-					//mapmodal.style.display = "none";
+					
 					modal.style.display = "block";
+
+					parentDOM = document.getElementById('myModal');
+					span = parentDOM.getElementsByClassName('close')[0];
+					console.log("span is " + span);
+
+					// When the user clicks on <span> (x), close the modal
+					span.onclick = function() {
+						var modal = document.getElementById('myModal');
+						modal.style.display = "none";
+					}
+					  
 
 					console.log(markers[0].position.lat);
 
@@ -149,9 +159,3 @@ function initMap()
 }
 
 
-					// When the user clicks on <span> (x), close the modal
-function hideblock() {
-	var modal = document.getElementById('myModal');
-	modal.style.display = "none";
-}
-  
