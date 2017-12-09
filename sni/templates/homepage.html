@@ -19,23 +19,28 @@
             {% url "account_signup" as signup_url %}
 
             <div class="container homesni">
-                <h2 class="text-center">{% blocktrans %}CLEAN INDIA{% endblocktrans %}</h2>
-                <p class="text-center">
-                    {% blocktrans %}
-                      Contribute to clean rajasthan mission by sign up now.
-                    {% endblocktrans %}
-                </p>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <img src="/site_media/media/cleanind.png" align="text-center">
+                        <!--<h2 class="text-center">{% blocktrans %}CLEAN INDIA{% endblocktrans %}</h2>-->
+                        <p class="text-center">
+                            {% blocktrans %}
+                              Contribute to CLEAN INDIA mission by marking the garbage of your area.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 loginhome" style="padding-bottom: 30%;">
                     <p>
                         {% blocktrans %}
-                            Already have account <a href="{{ login_url }}" class="btn btn-default">Log In</a>
+                            Already registered <a href="{{ login_url }}" class="btn btn-default">Log In</a>
                         {% endblocktrans %}
-                    </p> <br>
+                    </p>    
                     <p>
                         {% blocktrans %}
-                            New here <a href="{{ signup_url }}" class="btn" style="background-color: #b8e098; color: white; font-weight: bold;">Sign Up</a>
+                            New here <a href="{{ signup_url }}" class="btn" style="background-color: grey; color: white;">Sign Up</a>
                         {% endblocktrans %}
                     </p>
                 </div>

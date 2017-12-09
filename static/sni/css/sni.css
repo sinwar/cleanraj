@@ -2,29 +2,10 @@
     background-color: white;
 }
 .homesni {
-    padding-top: 10%;
+    padding-top: 5%;
 }
 
-.sounds {
-    margin-top: 5%;
-    padding: 10%;
-    background-color: #b8e098;
-}
 
-.usersounds h2 {
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.usersounds button {
-    background-color: white;
-    height: 40px;
-    width: 150px;
-    text-transform: uppercase;
-    border-radius: 5px;
-    margin-top: 5%;
-    font-size: 20px;
-}
 
 
 .content button {
