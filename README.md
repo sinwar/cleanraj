@@ -1,12 +1,18 @@
-# Clean Raj
+# CLEAN INDIA
 
-Clean Raj- A project to support clean Rajasthan mission.
+Clean Raj- A project to support clean clean india mission.
 
-Technology used :-
+In this web app, a user can log in and mark the location having garbage so the government can collect the garbage from the marked locations.
+
+Technologies used :-
 
 1. pinax starter project 
 
-2. Google map api
+2. Python Django
+
+3. Google map api
+
+4. Hasura 
 
 
 
