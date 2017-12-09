@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, addThing, location
+from .models import UserProfile, location
 
 admin.site.register(UserProfile)
-admin.site.register(addThing)
 admin.site.register(location)

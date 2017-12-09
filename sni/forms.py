@@ -40,21 +40,3 @@ class SignupForm(account.forms.SignupForm):
             raise forms.ValidationError(_("Last name can only contain letters, numbers and underscores."))
 
         return last_name
-
-
-
-
-# form for add new thing in addThing model
-
-class addThingForm(ModelForm):
-
-    class Meta:
-        model = models.addThing
-        fields = ['soundname', 'soundimage', 'sound']
-
-    # clean method for itemname
-    def clean_itemname(self):
-        itemname = self.cleaned_data["soundname"]
-        if not alnum_re.search(itemname):
-            raise forms.ValidationError(_("Item name can only contain letters, numbers and underscores."))
-        return itemname

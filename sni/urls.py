@@ -14,8 +14,6 @@ urlpatterns = [
     url(r"^admin/", include(admin.site.urls)),
     url(r"^$", homeView, name = "home"),
     url(r"^account/pro/(?P<pk>[a-zA-Z0-9_-]+)/$",ProView, name = "account_pro"),
-    url(r"^addthing/$",addThingCreate.as_view(), name="add_item"),
-    url(r"^addthing/added/$",TemplateView.as_view(template_name = "sni/added.html"), name="added"),
     #url(r"^account/profile/(?P<pk>\d+)/$",ProfileView.as_view(), name = "account_profile"),
     url(r"^account/signup/", SignupView.as_view(), name = "account_signup"),
     url(r'^ajax/validate_username/$', validate_username, name='validate_username'),

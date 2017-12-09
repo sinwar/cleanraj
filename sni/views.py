@@ -31,8 +31,8 @@ from django.shortcuts import redirect, get_object_or_404, render_to_response, re
 from django.views.generic import TemplateView, DetailView
 from django.views.generic.edit import FormView, CreateView
 import account.views
-from .forms import SignupForm, addThingForm
-from .models import UserProfile, addThing, location
+from .forms import SignupForm
+from .models import UserProfile, location
 from account.conf import settings
 
 from django.contrib.auth.decorators import login_required
@@ -72,19 +72,6 @@ def ProView(request, pk):
 # profile detail view
 class ProfileView(DetailView):
     model = UserProfile
-
-
-# createview for add item
-class addThingCreate(CreateView):
-    template_name = "sni/addThing_create_form.html"
-    form_class = addThingForm
-    success_url = '/addthing/added/'
-    model = addThing
-    # adding current user using validation
-    def form_valid(self, form):
-        form.instance.owner = self.request.user
-        return super(addThingCreate, self).form_valid(form)
-
 
 
 def homeView(request):
