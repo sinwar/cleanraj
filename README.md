@@ -1,5 +1,9 @@
 # CLEAN INDIA
 
+new repo - https://github.com/sinwar/cleanraj-hasura
+
+live - https://app.anathema47.hasura-app.io
+
 Clean Raj- A project to support clean clean india mission.
 
 In this web app, a user can log in and mark the location having garbage so the government can collect the garbage from the marked locations.
